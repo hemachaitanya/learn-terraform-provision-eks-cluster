@@ -12,6 +12,7 @@ pipeline{
                     sh 'terraform --version'
                     sh 'terraform init'
                     sh 'terraform apply -auto-approve'
+                    sh 'terraform destroy -auto-approve'
                     sh 'aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)'
                 }
             }
