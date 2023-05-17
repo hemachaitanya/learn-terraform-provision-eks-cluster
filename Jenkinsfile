@@ -24,6 +24,7 @@ pipeline{
             }
             stage('continuous deployment'){
                 steps{
+                    sh 'cd ../..'
                     sh 'kubectl apply -f spc-service.yaml'
                     sh 'kubectl apply -f spc.yaml'
                     sh 'kubectl get po'
