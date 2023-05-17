@@ -3,7 +3,7 @@ pipeline{
         stages{
             stage ('build and package'){
                 steps{
-                    git url: 'https://github.com/hemachaitanya/dockernotes.git',
+                    git url: 'https://github.com/hemachaitanya/learn-terraform-provision-eks-cluster.git',
                         branch: 'main'
                }
             }
