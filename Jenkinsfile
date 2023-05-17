@@ -22,11 +22,14 @@ pipeline{
                     sh 'docker push hema789/hello:sring-3.0'
                 }
             }
-            stage('kubernetesformulas'){
-                sh 'kubectl apply -f spc-service.yaml'
-                sh 'kubectl apply -f spc.yaml'
-                sh 'kubectl get po'
-                sh 'kubectl get svc'
+            stage('continuous deployment'){
+                steps{
+                    sh 'kubectl apply -f spc-service.yaml'
+                    sh 'kubectl apply -f spc.yaml'
+                    sh 'kubectl get po'
+                    sh 'kubectl get svc'
+                }
+               
             }
         }
     }
