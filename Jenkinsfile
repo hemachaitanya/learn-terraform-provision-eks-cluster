@@ -9,8 +9,9 @@ pipeline{
             }
             stage('cluster install by tf'){
                 steps{
+                    sh 'terraform --version'
                     sh 'terraform init'
-                    sh 'terraform -auto-approve'
+                    sh 'terraform apply -auto-approve'
                 }
             }
         }
