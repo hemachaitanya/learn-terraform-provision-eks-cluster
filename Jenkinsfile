@@ -12,7 +12,6 @@ pipeline{
                     sh 'terraform --version'
                     sh 'terraform init'
                     sh 'terraform apply -auto-approve'
-                    sh 'terraform destroy -auto-approve'
                     sh 'aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)'
                 }
             }
@@ -25,7 +24,6 @@ pipeline{
             }
             stage('continuous deployment'){
                 steps{
-                    sh 'cd ../..'
                     sh 'kubectl apply -f spc-service.yaml'
                     sh 'kubectl apply -f spc.yaml'
                     sh 'kubectl get po'
