@@ -10,3 +10,8 @@ steps:
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
     tags: 'latest'
+
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: 'latest'
+
