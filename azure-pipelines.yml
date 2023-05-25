@@ -20,10 +20,16 @@ stages:
       inputs:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+        tags: 
+          $(tags)
         
     - task: TerraformTaskV4@4
       inputs:
-        provider: 'azurerm'
+        provider: 'aws'
         command: 'init'
-            tags: |
-              $(tag)
+        command: 'plan'
+    - task: AWSCLI@1
+      inputs:
+        regionName: 'us-east-1'
+        awsCommand: 'aws  configure'
+                
