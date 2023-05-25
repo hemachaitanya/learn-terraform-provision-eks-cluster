@@ -2,34 +2,11 @@ pool: 'Default'
 trigger:
 - main
 
-resources:
-- repo: self
-
-variables:
-  tag: '$(Build.BuildId)'
-
-stages:
-- stage: Build
-  displayName: Build image
-  jobs:
-  - job: Build
-    displayName: Build
-    steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-        tags: 
-          $(tags)
-        
-    - task: TerraformTaskV4@4
-      inputs:
-        provider: 'aws'
-        command: 'init'
-        command: 'plan'
-    - task: AWSCLI@1
-      inputs:
-        regionName: 'us-east-1'
-        awsCommand: 'aws  configure'
-                
+steps:
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Docker'
+    repository: 'spc'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    tags: 'latest'
