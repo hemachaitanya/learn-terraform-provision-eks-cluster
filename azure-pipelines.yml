@@ -9,3 +9,4 @@ steps:
     repository: 'hema789/spc'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
+    tags: 'latest'
